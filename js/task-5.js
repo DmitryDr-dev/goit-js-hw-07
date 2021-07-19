@@ -2,3 +2,15 @@
 
 // <input type="text" placeholder="Ваше имя?" id="name-input" />
 // <h1>Привет, <span id="name-output">незнакомец</span>!</h1>
+const refs = {
+  nameInputEl: document.querySelector('#name-input'),
+  nameOutputEl: document.querySelector('#name-output'),
+};
+
+refs.nameInputEl.addEventListener('input', onInputChange);
+
+function onInputChange(event) {
+  event.currentTarget.value.trim() === ''
+    ? (refs.nameOutputEl.textContent = 'незнакомец')
+    : (refs.nameOutputEl.textContent = event.currentTarget.value);
+}

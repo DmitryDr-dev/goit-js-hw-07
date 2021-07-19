@@ -1,0 +1,13 @@
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  column-gap: 20px;
+}
+
+.gallery img {
+  width: 200px;
+}
+
+.gallery li {
+  list-style: none;
+}
