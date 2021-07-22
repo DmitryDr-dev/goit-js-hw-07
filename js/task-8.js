@@ -17,12 +17,7 @@
 
 // <div id="boxes"></div>
 
-// const refs = {
-//   inputEl: document.querySelector('input'),
-//   btnRender: document.querySelector('[data-action="render"]'),
-//   btnDestroy: document.querySelector('[data-action="destroy"]'),
-// };
-const [inputEl, btnRender, btnDestroy] =
+const [inputEl, renderBtn, deleteBtn] =
   document.querySelector('#controls').children;
 const boxesEl = document.querySelector('#boxes');
 
@@ -32,39 +27,42 @@ function createRandom() {
   })`;
 }
 
-const createElements = () => {
-  let elements = [];
+function createBoxes() {
+  const boxProperties = [];
+
   for (let i = 0; i < inputEl.value; i += 1) {
     let size = `${30 + i * 10}px`;
     let color = createRandom();
-    let element = { size, color };
-    elements.push(element);
+    const boxProperty = { size, color };
+    boxProperties.push(boxProperty);
   }
 
-  return elements;
-};
+  return boxProperties;
+}
 
-const createMarkUp = options => {
+// console.log(createBoxes(5));
+
+function createMarkUp(options) {
   return options.map(({ size, color }) => {
-    const divEl = document.createElement('div');
-    divEl.style.width = size;
-    divEl.style.height = size;
-    divEl.style.backgroundColor = color;
-    // console.log(divEl);
-    return divEl;
+    const box = document.createElement('div');
+    box.style.width = size;
+    box.style.height = size;
+    box.style.backgroundColor = color;
+    return box;
+    // console.log(box);
   });
-};
+}
 
-const renderMarkUp = el => {
-  const elements = createElements();
-  const markUp = createMarkUp(elements);
+function renderMarkup() {
+  const properties = createBoxes();
+  const markUp = createMarkUp(properties);
+
   boxesEl.append(...markUp);
-};
+}
 
-const destroyMarkup = () => {
+function deleteMarkUp() {
   inputEl.value = '';
   boxesEl.innerHTML = '';
-};
-
-btnRender.addEventListener('click', renderMarkUp);
-btnDestroy.addEventListener('click', destroyMarkup);
+}
+renderBtn.addEventListener('click', renderMarkup);
+deleteBtn.addEventListener('click', deleteMarkUp);
